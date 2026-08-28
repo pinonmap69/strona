@@ -304,6 +304,7 @@ ul {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(1.1);
 }
 
 .hero__overlay {
@@ -355,29 +356,6 @@ ul {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.hero__scroll {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: rgba(244, 241, 234, 0.5);
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  z-index: 2;
-}
-
-.hero__scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--copper), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
 }
 
 @keyframes scrollPulse {
@@ -674,9 +652,22 @@ ul {
 
 .tours-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.5rem;
   margin-bottom: 3rem;
+}
+
+.tours-grid .tour-card:nth-child(1),
+.tours-grid .tour-card:nth-child(2),
+.tours-grid .tour-card:nth-child(3) {
+  grid-column: span 2;
+}
+
+.tour-card--centered {
+  grid-column: 2 / span 2;
+  justify-self: center;
+  width: 100%;
+  max-width: 380px;
 }
 
 .tour-card {
@@ -862,6 +853,12 @@ ul {
   margin-bottom: 3rem;
 }
 
+.reviews-grid--two {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .review {
   background: var(--white);
   border-radius: var(--radius);
@@ -1036,6 +1033,18 @@ ul {
   .gallery {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .tours-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tours-grid .tour-card:nth-child(1),
+  .tours-grid .tour-card:nth-child(2),
+  .tours-grid .tour-card:nth-child(3),
+  .tour-card--centered {
+    grid-column: 1;
+    max-width: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1084,10 +1093,6 @@ ul {
 
   .offer-grid {
     grid-template-columns: 1fr;
-  }
-
-  .hero__scroll {
-    display: none;
   }
 
   .footer__inner {
