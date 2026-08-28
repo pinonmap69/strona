@@ -967,7 +967,15 @@ ul {
 
 .contact__list a {
   color: var(--copper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   transition: color var(--transition);
+}
+
+.contact__phone {
+  color: var(--sand);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .contact__list a:hover {
