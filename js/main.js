@@ -10,16 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
   navToggle.addEventListener('click', () => {
     const isOpen = navMenu.classList.toggle('active');
     navToggle.classList.toggle('active', isOpen);
+    header.classList.toggle('header--menu-open', isOpen);
     navToggle.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    navToggle.setAttribute('aria-label', isOpen ? 'Zamknij menu' : 'Otwórz menu');
+    document.body.classList.toggle('menu-open', isOpen);
   });
 
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('active');
       navToggle.classList.remove('active');
+      header.classList.remove('header--menu-open');
       navToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      navToggle.setAttribute('aria-label', 'Otwórz menu');
+      document.body.classList.remove('menu-open');
     });
   });
 

@@ -270,11 +270,14 @@ ul {
 .nav__toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
+  position: relative;
+  z-index: 1102;
 }
 
 .nav__toggle span {
@@ -283,6 +286,25 @@ ul {
   height: 2px;
   background: var(--sand);
   transition: var(--transition);
+  transform-origin: center;
+}
+
+.header--menu-open {
+  z-index: 1100;
+  background: var(--basalt);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.header--menu-open .nav__logo {
+  position: relative;
+  z-index: 1102;
+}
+
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 /* ---- Hero ---- */
@@ -1053,25 +1075,53 @@ ul {
 
   .nav__menu {
     position: fixed;
-    top: var(--header-height);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--basalt);
+    inset: 0;
+    z-index: 1101;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0;
+    padding: calc(var(--header-height) + 1.5rem) 1.5rem 2rem;
+    background: var(--basalt);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     transform: translateX(100%);
-    transition: transform var(--transition);
-    padding: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.35s,
+                opacity 0.35s;
+    pointer-events: none;
   }
 
   .nav__menu.active {
     transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__menu li {
+    width: 100%;
+    border-bottom: 1px solid rgba(244, 241, 234, 0.12);
   }
 
   .nav__menu a {
-    font-size: 1.2rem;
+    display: block;
+    width: 100%;
+    padding: 1.1rem 0;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--sand);
+  }
+
+  .nav__menu .nav__cta {
+    margin-top: 1rem;
+    padding: 1rem 1.5rem !important;
+    text-align: center;
+    border-bottom: none;
   }
 
   .nav__toggle.active span:nth-child(1) {
